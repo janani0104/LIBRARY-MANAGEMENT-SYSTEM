@@ -1,0 +1,58 @@
+{% extends "base.html" %}
+{% block content %}
+    <h1>Search Books</h1>
+    <form method="POST">
+        <label for="genre">Choose a genre:</label>
+        <select name="genre" id="genre">
+            <option value="">All Genres</option>
+            {% for genre in genres %}
+                <option value="{{ genre }}">{{ genre }}</option>
+            {% endfor %}
+        </select>
+        <input type="text" name="search_query" placeholder="Enter book title or author">
+        <button type="submit">Search</button>
+    </form>
+
+    {% if books_by_genre %}
+        {% for genre, books in books_by_genre.items() %}
+            <h2>{{ genre }}</h2>
+            {% if books %}
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Title</th>
+                            <th>Author</th>
+                            <th>Available?</th>
+                            <th>Details</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {% for book in books %}
+                            <tr>
+                                <td>{{ book.title }}</td>
+                                <td>{{ book.author }}</td>
+                                <td>
+                                    {% if book.available_copies > 0 %}
+                                        Yes
+                                    {% else %}
+                                        No
+                                    {% endif %}
+                                </td>
+                                <td>
+                                    {% if book.available_copies > 0 %}
+                                        <a href="{{ url_for('reserve_book', book_id=book.id) }}">Reserve</a>
+                                    {% endif %}
+                                    | <a href="{{ url_for('view_books', book_id=book.id) }}">View Details</a>
+                                </td>
+                            </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
+            {% else %}
+                <p>No books found.</p>
+            {% endif %}
+        {% endfor %}
+    {% else %}
+        <p>No books found.</p>
+    {% endif %}
+{% endblock %}

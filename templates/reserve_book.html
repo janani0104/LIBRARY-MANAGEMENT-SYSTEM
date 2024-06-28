@@ -1,0 +1,18 @@
+{% extends "base.html" %}
+{% block content %}
+    <h1>Reserve Book</h1>
+    <p>Title: {{ book.title }}</p>
+    <p>Author: {{ book.author }}</p>
+    <p>Genre: {{ book.genre }}</p>
+    <p>ISBN: {{ book.isbn }}</p>
+    <p>Available Copies: {{ book.available_copies }}</p>
+    {% if session.loggedin and session.role == 'student' %}
+        <form action="{{ url_for('reserve_book', book_id=book.id) }}" method="POST">
+            <label for="return_date">Due Date:</label>
+            <input type="date" id="return_date" name="return_date" required>
+            <button type="submit">Reserve</button>
+        </form>
+    {% else %}
+        <p>You need to be logged in as a student to reserve this book.</p>
+    {% endif %}
+{% endblock %}

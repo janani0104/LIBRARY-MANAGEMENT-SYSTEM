@@ -1,0 +1,13 @@
+{% extends "base.html" %}
+{% block content %}
+    <h1>Messages</h1>
+    {% if messages %}
+        <ul  class="messages-list">
+            {% for message in messages %}
+                <li>{{ message.message }}</li>
+            {% endfor %}
+        </ul>
+    {% else %}
+        <p class="no-messages">No messages</p>
+    {% endif %}
+{% endblock %}

@@ -1,0 +1,54 @@
+{% extends "base.html" %}
+{% block content %}
+    <h1>Issued Books</h1>
+    <table>
+        <thead>
+            <tr>
+                <th>Title</th>
+                <th>Username</th>
+                <th>Issue Date</th>
+                <th>Return Date</th>
+                <th>Returned</th>  
+            </tr>
+        </thead>
+        <tbody>
+            {% for issue in issues %}
+                <tr>
+                    <td>{{ issue.title }}</td>
+                    <td>{{ issue.username }}</td>
+                    <td>{{ issue.issue_date }}</td>
+                    <td>{{ issue.return_date }}</td>
+                    <td>
+                        {% if issue.returned %}
+                            Yes
+                        {% else %}
+                            No
+                        {% endif %}
+                    </td>
+                </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+
+    <h1>Reserved Books</h1>
+    <table>
+        <thead>
+            <tr>
+                <th>Title</th>
+                <th>Username</th>
+                <th>Issue Date</th>
+                <th>Return Date</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for reservation in reservations %}
+                <tr>
+                    <td>{{ reservation.title }}</td>
+                    <td>{{ reservation.username }}</td>
+                    <td>{{ reservation.issue_date }}</td>
+                    <td>{{ reservation.return_date }}</td>
+                </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+{% endblock %}

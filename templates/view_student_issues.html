@@ -1,0 +1,52 @@
+{% extends "base.html" %}
+{% block content %}
+    <h1>Issued Books</h1>
+    <table>
+        <thead>
+            <tr>
+                <th>Title</th>
+                <th>Issue Date</th>
+                <th>Return Date</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for issue in issues %}
+                <tr>
+                    <td>{{ issue.title }}</td>
+                    <td>{{ issue.issue_date }}</td>
+                    <td>{{ issue.return_date }}</td>
+                    <td>
+                        {% if not issue.returned %}
+                            <form action="{{ url_for('return_book', issue_id=issue.id) }}" method="POST" style="display:inline;">
+                                <button type="submit">Return</button>
+                            </form>
+                        {% else %}
+                            Returned
+                        {% endif %}
+                    </td>
+                </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+
+    <h1>Reserved Books</h1>
+    <table>
+        <thead>
+            <tr>
+                <th>Title</th>
+                <th>Issue Date</th>
+                <th>Return Date</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for reservation in reservations %}
+                <tr>
+                    <td>{{ reservation.title }}</td>
+                    <td>{{ reservation.issue_date }}</td>
+                    <td>{{ reservation.return_date }}</td>
+                </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+{% endblock %}

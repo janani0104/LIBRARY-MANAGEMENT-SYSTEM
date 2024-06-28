@@ -1,0 +1,30 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Library Management System</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+    <nav>
+        <ul>
+            <li><a href="{{ url_for('index') }}">Home</a></li>
+            {% if session.role == 'admin' %}
+                <li><a href="{{ url_for('add_book') }}">Add Book</a></li>
+                <li><a href="{{ url_for('issue_book') }}">Issue Book</a></li>
+                <li><a href="{{ url_for('view_issues') }}">View Issues</a></li>
+                <li><a href="{{ url_for('overdue_books') }}">Overdue Books</a></li>  <!-- Add this line for admin -->
+            {% elif session.role == 'student' %}
+                <li><a href="{{ url_for('search_books') }}">Search🔍</a></li>
+                <li><a href="{{ url_for('view_student_issues') }}">View Issued Books</a></li>
+                <li><a href="{{ url_for('view_messages') }}">Messages ✉️</a></li>
+            {% endif %}
+            <li><a href="{{ url_for('view_books') }}">View Books</a></li>
+        </ul>
+    </nav>
+    <div class="container">
+        {% block content %}{% endblock %}
+    </div>
+</body>
+</html>

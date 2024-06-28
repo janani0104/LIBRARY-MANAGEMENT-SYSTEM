@@ -1,0 +1,26 @@
+{% extends "base.html" %}
+{% block content %}
+    <div class="container">
+        <h1>Issue Book</h1>
+        <form action="{{ url_for('issue_book') }}" method="POST">
+            <label for="book_id">Select Book:</label>
+            <select name="book_id" id="book_id">
+                {% for book in books %}
+                    <option value="{{ book.id }}">{{ book.title }}</option>
+                {% endfor %}
+            </select>
+
+            <label for="user_id">Select User:</label>
+            <select name="user_id" id="user_id">
+                {% for user in users %}
+                    <option value="{{ user.id }}">{{ user.name }}</option>
+                {% endfor %}
+            </select>
+
+            <label for="return_date">Due Date:</label>
+            <input type="date" id="return_date" name="return_date" required>
+            
+            <button type="submit">Issue Book</button>
+        </form>
+    </div>
+{% endblock %}

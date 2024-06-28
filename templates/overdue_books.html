@@ -1,0 +1,30 @@
+{% extends "base.html" %}
+{% block content %}
+    <h1>Overdue Books</h1>
+    <table>
+        <thead>
+            <tr>
+                <th>Book Title</th>
+                <th>Username</th>
+                <th>Issue Date</th>
+                <th>Return Date</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for book in overdue_books %}
+                <tr>
+                    <td>{{ book.title }}</td>
+                    <td>{{ book.username }}</td>
+                    <td>{{ book.issue_date }}</td>
+                    <td>{{ book.return_date }}</td>
+                    <td>
+                        <form action="{{ url_for('send_reminder', issue_id=book.id) }}" method="POST">
+                            <button type="submit">Send Reminder</button>
+                        </form>
+                    </td>
+                </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+{% endblock %}

@@ -1,0 +1,9 @@
+{% extends "base.html" %}
+
+{% block content %}
+    <h1>Welcome, {{ role|capitalize }}</h1>
+    <div style="text-align: center;">
+        <img src="{% if role == 'admin' %}{{ url_for('static', filename='cit.png') }}{% elif role == 'student' %}{{ url_for('static', filename='Quote-4.png') }}{% endif %}" alt="User Image" style="width: 300px; height: 300px; border-radius: 50%;">
+    </div>
+{% endblock %}
+
