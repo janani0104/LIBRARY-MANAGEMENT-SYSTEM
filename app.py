@@ -8,7 +8,7 @@ app.secret_key = '07b07178cffdec6daa9619b079793ea5c13ec01ba65b777d'  # Add a sec
 
 app.config['MYSQL_HOST'] = 'localhost'
 app.config['MYSQL_USER'] = 'root'
-app.config['MYSQL_PASSWORD'] = 'janani@123'
+app.config['MYSQL_PASSWORD'] = 'password'
 app.config['MYSQL_DB'] = 'library_db'
 
 mysql = MySQL(app)
